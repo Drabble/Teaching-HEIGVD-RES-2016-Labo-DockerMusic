@@ -1,0 +1,16 @@
+{
+    "name": "auditor",
+    "preferGlobal": true,
+    "version": "0.0.1",
+    "author": "Antoine Drabble & Guillaume Serneels",
+    "description": "a simple UDP app",
+    "license": "MIT",
+    "engines": {
+        "node": ">=0.10"
+    },
+    "scripts": {
+        "start": "node ./auditor.js"
+    },
+    "dependencies": {
+    }
+}
