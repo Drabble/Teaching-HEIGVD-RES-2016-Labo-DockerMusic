@@ -9,7 +9,7 @@
         "node": ">=0.10"
     },
     "scripts": {
-        "start": "node ./auditor.js"
+        "start": "node ./server.js"
     },
     "dependencies": {
     }

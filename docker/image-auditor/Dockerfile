@@ -6,4 +6,4 @@ MAINTAINER Antoine Drabble & Guillaume Serneels
 #
 COPY src /opt/app/
 
-ENTRYPOINT ["node", "/opt/app/auditor.js"]
+ENTRYPOINT ["node", "/opt/app/server.js"]
