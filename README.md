@@ -105,7 +105,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | --- | --- |
 |Question | How can we represent the system in an **architecture diagram**, which gives information both about the Docker containers, the communication protocols and the commands? |
-| | *Insert your diagram here...* |
+| | *TODO Insert your diagram here...* |
 |Question | Who is going to **send UDP datagrams** and **when**? |
 | | *Musicians, every seconds* |
 |Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received? |
@@ -133,9 +133,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | In Node.js, how can we execute a function on a **periodic** basis?
 | | * setInterval(this.update.bind(this), 1000) for example to execute it every second*
 |Question | In Node.js, how can we **emit UDP datagrams**?
-| | *1. Create a socket with UDP 4 : var s = dgram.createSocket('udp4') 2. Send the datagram via that socket using the send command :
-    s.send(message, 0, message.length, protocol.PROTOCOL_PORT, protocol.PROTOCOL_MULTICAST_ADDRESS, function(err, bytes) {
-      console.log("Sending payload: " + payload + " via port " + s.address().port);
+| | *1. Create a socket with UDP 4 : var s = dgram.createSocket('udp4') 2. Send the datagram via that socket using the send command : s.send(message, 0, message.length, protocol.PROTOCOL_PORT, protocol.PROTOCOL_MULTICAST_ADDRESS, function(err, bytes) { console.log("Sending payload: " + payload + " via port " + s.address().port);
     })*
 |Question | In Node.js, how can we **access the command line arguments**?
 | | *Using : var type = process.argv[2], for axample to get the second argument*
@@ -156,7 +154,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | How do we **stop/kill** one running container?
 | | *Using the command: docker kill container_id (we can get the id's of every container using the command:  docker ps *
 |Question | How can we check that our running containers are effectively sending UDP datagrams?
-| | *Enter your response here...*
+| | * TODO Enter your response here...*
 
 
 ## Task 4: implement an "auditor" Node.js application
