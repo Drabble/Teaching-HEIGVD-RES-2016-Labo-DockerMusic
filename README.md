@@ -102,24 +102,24 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 
 ## Task 1: design the application architecture and protocols
 
-| #  | Topic
-|   | ---
-|Question | How can we represent the system in an **architecture diagram**, which gives information both about the Docker containers, the communication protocols and the commands?
-| | *Insert your diagram here...*
-|Question | Who is going to **send UDP datagrams** and **when**?
-| | *Enter your response here...*
-|Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received?
-| | *Enter your response here...*
-|Question | What **payload** should we put in the UDP datagrams?
-| | *Enter your response here...*
-|Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures?
-| | *Enter your response here...*
+| #  | Topic |
+| --- | --- |
+|Question | How can we represent the system in an **architecture diagram**, which gives information both about the Docker containers, the communication protocols and the commands? |
+| | *Insert your diagram here...* |
+|Question | Who is going to **send UDP datagrams** and **when**? |
+| | *Enter your response here...* |
+|Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received? |
+| | *Enter your response here...* |
+|Question | What **payload** should we put in the UDP datagrams? |
+| | *Enter your response here...* |
+|Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures? |
+| | *Enter your response here...* |
 
 
 ## Task 2: implement a "musician" Node.js application
 
 | #  | Topic
-|   | ---
+| ---  | ---
 |Question | In a JavaScript program, if we have an object, how can we **serialize it in JSON**?
 | | *Enter your response here...*
 |Question | What is **npm**?
@@ -141,7 +141,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 ## Task 3: package the "musician" app in a Docker image
 
 | #  | Topic
-|   | ---
+| ---  | ---
 |Question | How do we **define and build our own Docker image**?
 | | *Enter your response here...*
 |Question | How can we use the `ENTRYPOINT` statement in our Dockerfile?
@@ -159,7 +159,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 ## Task 4: implement an "auditor" Node.js application
 
 | #  | Topic
-|   | ---
+| ---  | ---
 |Question | With Node.js, how can we listen for UDP datagrams in a multicast group?
 | | *Enter your response here...*
 |Question | How can we use the `Map` built-in object introduced in ECMAScript 6 to implement a **dictionary**? 
@@ -175,7 +175,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 ## Task 5: package the "auditor" app in a Docker image
 
 | #  | Topic
-|   | ---
+| ---  | ---
 |Question | How do we validate that the whole system works, once we have built our Docker image?
 | | *Enter your response here...*
 
