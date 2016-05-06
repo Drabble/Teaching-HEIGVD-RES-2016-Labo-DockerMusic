@@ -76,4 +76,4 @@ var server = net.createServer(function(socket) {
 });
 
 setInterval(checkMusicians, 1000);
-server.listen(2205, '127.0.0.1');
+server.listen(2205, '0.0.0.0');

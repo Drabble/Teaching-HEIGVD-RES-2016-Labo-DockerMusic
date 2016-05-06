@@ -16,20 +16,12 @@ var protocol = require('./protocol');
  */
 var dgram = require('dgram');
 
+var uuid = require('node-uuid');
+
 /*
  * Let's create a datagram socket. We will use it to send our UDP datagrams 
  */
 var s = dgram.createSocket('udp4');
-
-function generateUUID() {
-    var d = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = (d + Math.random()*16)%16 | 0;
-        d = Math.floor(d/16);
-        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
-    });
-    return uuid;
-};
 
 /*
  * Let's define a javascript class for our thermometer. The constructor accepts
@@ -40,7 +32,7 @@ function Musician(sound, instrument) {
 
 	this.sound = sound;
 	this.activeSince = new Date().toISOString();
-	this.uuid = generateUUID();
+	this.uuid = uuid.v4();
 	this.instrument = instrument;
 
 /*
