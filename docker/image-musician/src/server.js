@@ -1,12 +1,14 @@
 /*
- This program simulates a "smart" thermometer, which publishes the measured temperature
- on a multicast group. Other programs can join the group and receive the measures. The
- measures are transported in json payloads with the following format:
-   {"timestamp":1394656712850,"location":"kitchen","temperature":22.5}
- Usage: to start a thermometer, type the following command in a terminal
-        (of course, you can run several thermometers in parallel and observe that all
-        measures are transmitted via the multicast group):
-   node thermometer.js location temperature variation
+ This program simulates a musician, which emits a particular sound to
+ a multicast group depending on which instrument he is playing. 
+ Usage: to start a musician, type the following command in a terminal
+        (of course, you can run several musicians in parallel and observe that all
+        sounds are transmitted via the multicast group):
+   node server.js instrument_type
+
+   instrument_type can be : piano, trumpet, flute, violin or drum
+
+
 */
 
 var protocol = require('./protocol');
@@ -24,9 +26,8 @@ var uuid = require('node-uuid');
 var s = dgram.createSocket('udp4');
 
 /*
- * Let's define a javascript class for our thermometer. The constructor accepts
- * a location, an initial temperature and the amplitude of temperature variation
- * at every iteration
+ * Let's define a javascript class for our musician. The constructor accepts
+ * a sound and an instrument_type
  */
 function Musician(sound, instrument) {
 
@@ -36,15 +37,16 @@ function Musician(sound, instrument) {
 	this.instrument = instrument;
 
 /*
-   * We will simulate temperature changes on a regular basis. That is something that
+   * We will emit a packet representing a musician's sound on a regular basis. That is something that
    * we implement in a class method (via the prototype)
    */
 	Musician.prototype.update = function() {
 		
 		/*
-		 * Let's create the measure as a dynamic javascript object, 
-		 * add the 3 properties (timestamp, location and temperature)
-		 * and serialize the object to a JSON string
+		 * Let's create a dynamic javascript object, reprensenting a single sound emitted by the musician
+		 * We added 4 properties (the uuid of the musician, the sound emitted, the instrument played and 
+		 the time since it has started playing)
+		 * Then we serialize the object to a JSON string
 		 */
 		var musician = {
 			uuid: this.uuid,
@@ -66,15 +68,15 @@ function Musician(sound, instrument) {
 	}
 
 	/*
-	 * Let's take and send a measure every 1000 ms
+	 * Let's send a sound every 1000 ms
 	 */
 	setInterval(this.update.bind(this), 1000);
 
 }
 
 /*
- * Let's get the thermometer properties from the command line attributes
- * Some error handling wouln't hurt here...
+ * Let's fix the musician's sound based on the command line argument instrument_type
+ * 
  */
 var type = process.argv[2];
 var sound;
@@ -100,7 +102,6 @@ switch(type) {
 }
 
 /*
- * Let's create a new thermoter - the regular publication of measures will
- * be initiated within the constructor
+ * Let's create the new musician 
  */
 var m = new Musician(sound, type);

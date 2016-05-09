@@ -7,6 +7,10 @@ MAINTAINER Antoine Drabble & Guillaume Serneels
 # When we build the image, we copy the executable jar in the image file system. 
 #
 COPY src /opt/app/
+#
+# Install dependencies
+#
+RUN npm --prefix ./opt/app install ./opt/app
 
 #	
 #	Our	application	will	accept	TCP	connections	on	port	2205.	Note	that	the	EXPOSE	statement	

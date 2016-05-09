@@ -1,16 +1,20 @@
 /*
- This program simulates a "data collection station", which joins a multicast
- group in order to receive measures published by thermometers (or other sensors).
- The measures are transported in json payloads with the following format:
-   {"timestamp":1394656712850,"location":"kitchen","temperature":22.5}
+ This program simulates an "auditor", which joins a multicast
+ group in order to receive sounds emitted by several musicians.
+
+ The auditor keeps tracks of the active musicians by maintainig an array 
+ containing every musician which have emitted at least once during the 
+ last five seconds.
+
+ The sound are transported in json payloads with the following format:
+   {"uuid": ,"sound": , "instrument":, "activeSince":}
  Usage: to start the station, use the following command in a terminal
-   node station.js
+
+   node server.js
 */
 
 /*
- * We have defined the multicast address and port in a file, that can be imported both by
- * thermometer.js and station.js. The address and the port are part of our simple 
- * application-level protocol
+ * We have defined the multicast address and port in a separate protocol file
  */
 var protocol = require('./protocol');
 
@@ -24,7 +28,7 @@ var musicians = [];
 
 /* 
  * Let's create a datagram socket. We will use it to listen for datagrams published in the
- * multicast group by thermometers and containing measures
+ * multicast group by musicians and containing sounds
  */
 var s = dgram.createSocket('udp4');
 s.bind(protocol.PROTOCOL_PORT, function() {
@@ -40,19 +44,28 @@ s.on('message', function(msg, source) {
 	var musician = JSON.parse(msg);
 	var i;
 	var foundMusician = false;
+/* 
+ * Check if the emitting musician is already present in the active musician's array
+ */
     for (i = 0; i < musicians.length; i++) {
         if (musicians[i].uuid === musician.uuid) {
             // Update last update time
 			musicians[i].lastUpdate = new Date();
 			foundMusician = true;
         }
-    }
+    } 
+/* 
+ * If not, we add it
+ */    
 	if(foundMusician == false){
 		musician.lastUpdate = new Date();
 		musicians.push(musician);	
 	}
 });
-
+/* 
+ * Remove musicians who have not emitted during the last five seconds from the 
+ * active musician's array
+ */
 function checkMusicians() {
 	for (i = 0; i < musicians.length; i++) {
 		var dif = new Date().getTime() - musicians[i].lastUpdate.getTime();
@@ -63,7 +76,9 @@ function checkMusicians() {
         }
     }
 }
-
+/* 
+ * Returns a list of every active musicians
+ */
 var server = net.createServer(function(socket) {
 	var musiciansJSON = [];
 	for (i = 0; i < musicians.length; i++) {
@@ -74,6 +89,9 @@ var server = net.createServer(function(socket) {
 	socket.pipe(socket);
 	socket.end('Closing TCP socket\r\n');
 });
-
+/* 
+ * Set the time interval between every check of the active musician's array
+ * Here we chosed to check it every second
+ */
 setInterval(checkMusicians, 1000);
 server.listen(2205, '0.0.0.0');
