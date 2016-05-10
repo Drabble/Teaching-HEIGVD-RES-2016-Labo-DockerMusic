@@ -22,13 +22,20 @@ var protocol = require('./protocol');
  * We use a standard Node.js module to work with UDP
  */
 var dgram = require('dgram');
+
+/*
+ * We use a standard Node.js module to work with TCP
+ */
 var net = require('net');
 
+/*
+ * Contains the list of playing musicians
+ */
 var musicians = [];
 
 /* 
  * Let's create a datagram socket. We will use it to listen for datagrams published in the
- * multicast group by musicians and containing sounds
+ * multicast group containing the sounds played by the musicians.
  */
 var s = dgram.createSocket('udp4');
 s.bind(protocol.PROTOCOL_PORT, function() {
@@ -44,24 +51,27 @@ s.on('message', function(msg, source) {
 	var musician = JSON.parse(msg);
 	var i;
 	var foundMusician = false;
-/* 
- * Check if the emitting musician is already present in the active musician's array
- */
+	
+	/* 
+	 * Check if the emitting musician is already present in the active musician's array
+	 */
     for (i = 0; i < musicians.length; i++) {
         if (musicians[i].uuid === musician.uuid) {
-            // Update last update time
+            // Update last update time of the musician
 			musicians[i].lastUpdate = new Date();
 			foundMusician = true;
         }
     } 
-/* 
- * If not, we add it
- */    
+	
+	/* 
+	 * If he's not emitting, we add him
+	 */    
 	if(foundMusician == false){
 		musician.lastUpdate = new Date();
 		musicians.push(musician);	
 	}
 });
+
 /* 
  * Remove musicians who have not emitted during the last five seconds from the 
  * active musician's array
@@ -77,7 +87,8 @@ function checkMusicians() {
     }
 }
 /* 
- * Returns a list of every active musicians
+ * This callback is called when a TCP connection is opened on the listend ip and port.
+ * Returns a list of every active musicians.
  */
 var server = net.createServer(function(socket) {
 	var musiciansJSON = [];
@@ -89,9 +100,14 @@ var server = net.createServer(function(socket) {
 	socket.pipe(socket);
 	socket.end('Closing TCP socket\r\n');
 });
+
 /* 
  * Set the time interval between every check of the active musician's array
  * Here we chosed to check it every second
  */
 setInterval(checkMusicians, 1000);
+
+/*
+ * The server listens on the port 2205 for incoming TCP connections
+ */
 server.listen(2205, '0.0.0.0');

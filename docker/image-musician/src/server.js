@@ -11,6 +11,9 @@
 
 */
 
+/*
+ * We have defined the multicast address and port in a separate protocol file
+ */
 var protocol = require('./protocol');
 
 /*
@@ -18,6 +21,9 @@ var protocol = require('./protocol');
  */
 var dgram = require('dgram');
 
+/*
+ * Simple package for generating compliant with RFC4122
+ */
 var uuid = require('node-uuid');
 
 /*
@@ -45,7 +51,7 @@ function Musician(sound, instrument) {
 		/*
 		 * Let's create a dynamic javascript object, reprensenting a single sound emitted by the musician
 		 * We added 4 properties (the uuid of the musician, the sound emitted, the instrument played and 
-		 the time since it has started playing)
+		 * the time since it has started playing)
 		 * Then we serialize the object to a JSON string
 		 */
 		var musician = {
@@ -71,16 +77,19 @@ function Musician(sound, instrument) {
 	 * Let's send a sound every 1000 ms
 	 */
 	setInterval(this.update.bind(this), 1000);
-
 }
 
 /*
- * Let's fix the musician's sound based on the command line argument instrument_type
+ * Let's set the musician's sound based on the command line argument instrument_type
  * 
  */
 var type = process.argv[2];
 var sound;
 
+/*
+ * Let's define the sound depending on the musician
+ * Throw an exception if the musician's name is undefined
+ */
 switch(type) {
 	case "piano":
         sound = "ti-ta-ti";
