@@ -77,35 +77,29 @@ s.on('message', function(msg, source) {
  * active musician's array
  */
 function checkMusicians() {
-	for (i = 0; i < musicians.length; i++) {
-		var dif = new Date().getTime() - musicians[i].lastUpdate.getTime();
+	musicians = musicians.filter(function(musician){
+		var dif = new Date().getTime() - musician.lastUpdate.getTime();
 		var Seconds_from_T1_to_T2 = dif / 1000;
 		var Seconds_Between_Dates = Math.abs(Seconds_from_T1_to_T2);
-        if (Seconds_Between_Dates > 5) {
-            musicians.splice(i, 1);
-        }
-    }
+        return Seconds_Between_Dates <= 5;
+	});
 }
+
 /* 
  * This callback is called when a TCP connection is opened on the listend ip and port.
  * Returns a list of every active musicians.
  */
-var server = net.createServer(function(socket) {
-	var musiciansJSON = [];
-	for (i = 0; i < musicians.length; i++) {
-        var musician = {"uuid" : musicians[i].uuid, "instrument" : musicians[i].instrument, "activeSince" : musicians[i].activeSince};
-		musiciansJSON.push(musician);
-    }
-	socket.write(JSON.stringify(musiciansJSON) + "\r\n");
+var server = net.createServer(function(socket) {	
+	// Delete the musicians that didn't play for more than 5 seconds
+	checkMusicians();
+	
+	// Write the musicians array to the socket
+	socket.write(JSON.stringify(musicians.map(function(musician){
+		return {"uuid" : musician.uuid, "instrument" : musician.instrument, "activeSince" : musician.activeSince};
+	})) + "\r\n");
 	socket.pipe(socket);
 	socket.end();
 });
-
-/* 
- * Set the time interval between every check of the active musician's array
- * Here we chosed to check it every second
- */
-setInterval(checkMusicians, 1000);
 
 /*
  * The server listens on the port 2205 for incoming TCP connections
