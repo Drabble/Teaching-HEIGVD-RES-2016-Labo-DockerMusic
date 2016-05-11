@@ -100,26 +100,6 @@ if(type in map){
 }else{
 	throw "You must add a valid instrument to the parameters";
 }
-/*
-switch(type) {
-	case "piano":
-        sound = "ti-ta-ti";
-        break;
-	case "trumpet":
-        sound = "pouet";
-        break;
-	case "flute":
-        sound = "trulu";
-        break;
-	case "violin":
-        sound = "gzi-gzi";
-        break;
-    case "drum":
-        sound = "boum-boum";
-        break;
-    default:
-        throw "You must add a valid instrument to the parameters";
-}*/
 
 /*
  * Let's create the new musician 
