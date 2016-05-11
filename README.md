@@ -149,11 +149,11 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | After building our Docker image, how do we use it to **run containers**?
 | | *Using the command: docker run image_name*
 |Question | How do we get the list of all **running containers**?
-| | *Connect via telnet the the server: telnet 127.0.0.1 2205*
+| | *Using the command docker ps (we can also list all the non-running conteners)*
 |Question | How do we **stop/kill** one running container?
-| | *Using the command: docker kill container_id (we can get the id's of every container using the command:  docker ps *
+| | *Using the command: docker kill container_id (the command of the previous question shows the container_id)*
 |Question | How can we check that our running containers are effectively sending UDP datagrams?
-| | * TODO Enter your response here...*
+| | *By monitoring network traffic with a tool like tcpdump or udp*
 
 
 ## Task 4: implement an "auditor" Node.js application
@@ -161,8 +161,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic
 | ---  | ---
 |Question | With Node.js, how can we listen for UDP datagrams in a multicast group?
-| | *By specifying a Multicast address in the protocol.js file: 
-  exports.PROTOCOL_MULTICAST_ADDRESS = "239.255.22.5" and using it when sending the datagram through the socker*
+| | *By specifying a Multicast address in the protocol.js file: exports.PROTOCOL_MULTICAST_ADDRESS = "239.255.22.5" and using it when sending the datagram through the socker*
 |Question | How can we use the `Map` built-in object introduced in ECMAScript 6 to implement a **dictionary**? 
 | | *Enter your response here...*
 |Question | How can we use the `Moment.js` npm module to help us with **date manipulations** and formatting? 
