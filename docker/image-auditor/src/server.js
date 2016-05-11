@@ -98,7 +98,7 @@ var server = net.createServer(function(socket) {
     }
 	socket.write(JSON.stringify(musiciansJSON) + "\r\n");
 	socket.pipe(socket);
-	socket.end('Closing TCP socket\r\n');
+	socket.end();
 });
 
 /* 
