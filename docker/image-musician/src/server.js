@@ -7,8 +7,6 @@
    node server.js instrument_type
 
    instrument_type can be : piano, trumpet, flute, violin or drum
-
-
 */
 
 /*
@@ -90,7 +88,6 @@ var type = process.argv[2];
  * Throw an exception if the musician's name is undefined
  * To achieve that, we map every musician's type to it's corresponding sound
  */
-
 var map = {"piano":"ti-ta-ti","trumpet":"pouet","flute":"trulu","violin":"gzi-gzi","drum":"boum-boum"}
 
 function get(s){

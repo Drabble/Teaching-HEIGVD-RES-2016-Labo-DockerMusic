@@ -163,13 +163,13 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | With Node.js, how can we listen for UDP datagrams in a multicast group?
 | | *By specifying a Multicast address in the protocol.js file: exports.PROTOCOL_MULTICAST_ADDRESS = "239.255.22.5" and using it when sending the datagram through the socker*
 |Question | How can we use the `Map` built-in object introduced in ECMAScript 6 to implement a **dictionary**? 
-| | *Enter your response here...*
+| | *We create a new map, than we bind the parameter to the map with the method get*
 |Question | How can we use the `Moment.js` npm module to help us with **date manipulations** and formatting? 
-| | *Enter your response here...*
+| | *We didn't use that*
 |Question | When and how do we **get rid of inactive players**? 
-| | *Enter your response here...*
+| | *When a player connects to the TCP socket of the auditor, we used the filter method on the array*
 |Question | How do I implement a **simple TCP server** in Node.js? 
-| | *Enter your response here...*
+| | *With the net module*
 
 
 ## Task 5: package the "auditor" app in a Docker image
@@ -177,7 +177,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic
 | ---  | ---
 |Question | How do we validate that the whole system works, once we have built our Docker image?
-| | *Enter your response here...*
+| | *We create multiple musicians and one auditor, than we check with tcpdump that the packets are sent well. Finally we check if the TCP server outputs the right JSON even after deleting some musicians*
 
 
 ## Constraints
