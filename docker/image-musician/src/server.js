@@ -84,12 +84,23 @@ function Musician(sound, instrument) {
  * 
  */
 var type = process.argv[2];
-var sound;
 
 /*
  * Let's define the sound depending on the musician
  * Throw an exception if the musician's name is undefined
  */
+
+var map = {"piano":"ti-ta-ti","trumpet":"pouet","flute":"trulu","violin":"gzi-gzi","drum":"boum-boum"}
+
+function get(s){
+	return map[s];
+}
+if(type in map){
+	sound = get(type); //sound is a globa variable
+}else{
+	throw "You must add a valid instrument to the parameters";
+}
+/*
 switch(type) {
 	case "piano":
         sound = "ti-ta-ti";
@@ -108,7 +119,7 @@ switch(type) {
         break;
     default:
         throw "You must add a valid instrument to the parameters";
-}
+}*/
 
 /*
  * Let's create the new musician 
