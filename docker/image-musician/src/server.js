@@ -88,6 +88,7 @@ var type = process.argv[2];
 /*
  * Let's define the sound depending on the musician
  * Throw an exception if the musician's name is undefined
+ * To achieve that, we map every musician's type to it's corresponding sound
  */
 
 var map = {"piano":"ti-ta-ti","trumpet":"pouet","flute":"trulu","violin":"gzi-gzi","drum":"boum-boum"}
@@ -95,8 +96,9 @@ var map = {"piano":"ti-ta-ti","trumpet":"pouet","flute":"trulu","violin":"gzi-gz
 function get(s){
 	return map[s];
 }
+
 if(type in map){
-	sound = get(type); //sound is a globa variable
+	sound = get(type); //sound is a global variable
 }else{
 	throw "You must add a valid instrument to the parameters";
 }
